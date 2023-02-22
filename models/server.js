@@ -10,10 +10,12 @@ class Server {
         //Variables de configuración
         this.app = express();
         this.port = process.env.PORT;
-        this.estudiantePath = '/api/estudiante';
-        this.maestroPath = '/api/maestro';
-        this.cursoPath = '/api/curso';
-
+        this.paths = {
+            auth: '/api/auth',
+            estudiante: '/api/estudiante',
+            maestro: '/api/maestro',
+            curso: '/api/curso'
+        }
         //Conectar a base de datos
         this.conectarDB();
 
@@ -40,6 +42,7 @@ class Server {
         //Lectura y parseo del body
         this.app.use( express.json() );
 
+        //this.app.use(express.urlencoded());
         //Directorio publico del proyecto
         this.app.use(  express.static('public') );
 
@@ -47,9 +50,10 @@ class Server {
 
 
     routes(){
-        this.app.use( this.estudiantePath , require('../routes/estudiantes') );
-        this.app.use( this.maestroPath , require('../routes/maestros') );
-        this.app.use( this.cursoPath , require('../routes/cursos') );
+        this.app.use( this.paths.auth , require('../routes/auth') );
+        this.app.use( this.paths.estudiante , require('../routes/estudiantes') );
+        this.app.use( this.paths.maestro , require('../routes/maestros') );
+        this.app.use( this.paths.curso, require('../routes/cursos') );
     }
 
 

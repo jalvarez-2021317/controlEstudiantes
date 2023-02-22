@@ -1,19 +1,20 @@
 const { Schema, model } = require('mongoose');
 
-const CursoSchema = Schema({
+const CursoSchema = new Schema({
     nombre: {
-        type: String,
-        required: [true, 'El nombre es obligatorio']
+      type: String,
+      required: true
     },
-    Descripcion: {
-        type: String,
-        required: [true, 'El correo es obligatorio'],
-        unique: true
+    descripcion: String,
+    profesor: {
+      type: Schema.Types.ObjectId,
+      ref: 'maestro',
+      required: true
     },
-    estado: {
-        type: Boolean,
-        default: true
-    },
-});
+    estudiantes: [{
+      type: Schema.Types.ObjectId,
+      ref: 'estudiante'
+    }]
+  });
 
 module.exports = model('Curso', CursoSchema)

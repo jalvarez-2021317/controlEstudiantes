@@ -25,8 +25,8 @@ const getMaestro = async (req = request, res = response) => {
 
 const postMaestro = async (req = request, res = response) => {
 
-    const { nombre, correo, password,curso } = req.body;
-    const maestroDB = new Usuario({ nombre, correo, password, curso});
+    const { nombre,apellido,dpi, correo, password,curso } = req.body;
+    const maestroDB = new Usuario({ nombre, apellido, dpi ,correo, password, curso});
 
     //Encriptar password
     const salt = bcryptjs.genSaltSync();
@@ -47,7 +47,7 @@ const putMaestro= async (req = request, res = response) => {
     const { id } = req.params;
 
     //Ignoramos el _id, rol, estado y google al momento de editar y mandar la petición en el req.body
-    const { _id, rol, estado,  ...resto } = req.body;
+    const { _id,dpi, rol, estado,  ...resto } = req.body;
 
     // //Encriptar password
     const salt = bcryptjs.genSaltSync();

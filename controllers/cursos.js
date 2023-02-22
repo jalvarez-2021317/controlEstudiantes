@@ -24,16 +24,17 @@ const getCurso = async (req = request, res = response) => {
 
 const postCurso = async (req = request, res = response) => {
 
-    const { nombre, maestro, descripcion } = req.body;
-    const cursoDB = new Usuario({ nombre, maestro, descripcion });
+     try {
+    const { nombre, descripcion,estudiantes } = req.body;
+    const profesor = req.user._id; // El profesor que está creando el curso
 
-    //Guardar en Base de datos
-    await cursoDB.save();
+    const curso = await Curso.create({ nombre,descripcion, profesor, estudiantes });
+    res.status(201).json({ curso });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Hubo un error al crear el curso' });
+  }
 
-    res.status(201).json({
-        msg: 'POST API de Estudiante',
-        cursoDB
-    });
 
 }
 

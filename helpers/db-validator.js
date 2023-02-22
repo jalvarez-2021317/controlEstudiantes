@@ -10,11 +10,6 @@ const emailExiste = async( correo = '' ) => {
     if ( existeEmailDeUsuario) {
         throw new Error(`El correo ${ correo }, ya esta registrado en la DB `);
     }
-
-    const existeEmailDeMaestro= await Maestro.findOne( { correo } );
-    if ( existeEmailDeMaestro) {
-        throw new Error(`El correo ${ correo }, ya esta registrado en la DB `);
-    }
 }
 
 const esRoleValido = async( rol = '') => {
@@ -34,20 +29,20 @@ const esCursoValido = async( curso = '') => {
     }
 }
 
-const existeUsuarioPorId = async( id ) => {
+// const existeUsuarioPorId = async( id ) => {
 
-    //Verificar si existe el ID
-    const existIdOfUser = await Usuario.findById( id );
-    if ( !existIdOfUser ) {
-        throw new Error(`El id: ${id} no existe en la DB`);
-    }
+//     //Verificar si existe el ID
+//     const existIdOfUser = await Usuario.findById( id );
+//     if ( !existIdOfUser ) {
+//         throw new Error(`El id: ${id} no existe en la DB`);
+//     }
 
-}
+// }
 
 
 module.exports = {
     emailExiste,
     esRoleValido,
     esCursoValido,
-    existeUsuarioPorId
+    //existeUsuarioPorId
 }

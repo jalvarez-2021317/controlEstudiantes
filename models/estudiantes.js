@@ -5,6 +5,10 @@ const EstudianteSchema = Schema({
         type: String,
         required: [true, 'El nombre es obligatorio']
     },
+    apellido: {
+        type: String,
+        required: [true, 'El apellido es obligatorio']
+    },
     correo: {
         type: String,
         required: [true, 'El correo es obligatorio'],
@@ -16,12 +20,11 @@ const EstudianteSchema = Schema({
     },
     rol: {
         type: String,
-        required: true,
+        default: 'ROL_ESTUDIANTE'
     },
-    curso: {
-        type: String,
-        required: [true, 'El nombre es obligatorio']
-    },
+    cursos: [
+        { type: Schema.Types.ObjectId, ref: 'curso' 
+    }],
     estado: {
         type: Boolean,
         default: true
